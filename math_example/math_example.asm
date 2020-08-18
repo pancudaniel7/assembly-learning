@@ -5,8 +5,7 @@ section .text
 	global _start
 	
 _start:
-	mov rbx, 9
-	sub rbx, 2
+	mov rbx, 0
 	call _printZeroToTen
 	
 	mov rax, 60
@@ -15,11 +14,17 @@ _start:
 
 _printZeroToTen:
 	add rbx, 48
-	mov [digit], bl	
+
+_l1:
+	mov [digit], bl
 
 	mov rax, 1
 	mov rdi, 1
 	mov rsi, digit
  	mov rdx, 2
 	syscall
+
+	inc rbx
+	cmp rbx, 57
+	jle _l1
 	ret
